@@ -217,6 +217,7 @@ public class RippleBackground extends RelativeLayout implements Animator.Animato
         public void setHotspot(float x, float y) {
             hotspotY = y;
             hotspotX = x;
+            invalidate();
         }
     }
 
