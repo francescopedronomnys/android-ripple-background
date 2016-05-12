@@ -1,6 +1,7 @@
 package com.skyfishjy.library;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -144,7 +145,7 @@ public class RippleBackground extends RelativeLayout implements Animator.Animato
         rippleScale = (float) (max / rippleViewSize) * 2;
     }
 
-    private void initAnimation(boolean reverse) {
+    private void initAnimation(final boolean reverse) {
         float startValue;
         float endValue = reverse ? 1.0f : rippleScale;
 
@@ -163,12 +164,19 @@ public class RippleBackground extends RelativeLayout implements Animator.Animato
         animatorList = new ArrayList<Animator>();
 
         for (int i = 0; i < rippleViewList.size(); i++) {
-            RippleView rippleView = rippleViewList.get(i);
+            final RippleView rippleView = rippleViewList.get(i);
 
             final ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(rippleView, "ScaleX", startValue, endValue);
             scaleXAnimator.setStartDelay(i * rippleDelay);
             scaleXAnimator.setDuration(duration);
             scaleXAnimator.addUpdateListener(this);
+            scaleXAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    rippleView.setVisibility(reverse ? GONE : VISIBLE);
+                }
+            });
             animatorList.add(scaleXAnimator);
 
             final ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(rippleView, "ScaleY", startValue, endValue);
@@ -215,7 +223,6 @@ public class RippleBackground extends RelativeLayout implements Animator.Animato
     @Override
     public void onAnimationUpdate(ValueAnimator animation) {
         currentRippleScale = (float) animation.getAnimatedValue();
-        Log.d("Ciao", currentRippleScale + "");
     }
 
     private class RippleView extends View {
