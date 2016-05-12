@@ -102,8 +102,12 @@ public class RippleBackground extends RelativeLayout implements Animator.Animato
     }
 
     public void setHotSpot(View view) {
-        hotspotX = view.getX() + (view.getWidth() / 2);
-        hotspotY = view.getY() + (view.getHeight() / 2);
+        int[] viewXY = new int[2];
+        int[] rippleXY = new int[2];
+        view.getLocationInWindow(viewXY);
+        this.getLocationInWindow(rippleXY);
+        hotspotX = viewXY[0] + (view.getWidth() / 2) - rippleXY[0];
+        hotspotY = viewXY[1] + (view.getHeight() / 2) - rippleXY[1];
         for (RippleView rippleView : rippleViewList) {
             rippleView.setHotspot(hotspotX, hotspotY);
         }

@@ -15,13 +15,21 @@
 
     </com.skyfishjy.library.RippleBackground>
 
-    <TextView
-        android:id="@+id/hotspot"
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_margin="8dp"
-        android:text="HOTSPOT"/>
+        android:layout_marginTop="120dp">
+
+        <TextView
+            android:id="@+id/hotspot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="8dp"
+            android:text="HOTSPOT"/>
+    </FrameLayout>
+
 
     <ImageView
         android:id="@+id/centerImage"
