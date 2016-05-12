@@ -43,9 +43,9 @@ public class MainActivity extends Activity {
                 rippleBackground.setHotSpot(hotspot);
 
                 if (show)
-                    rippleBackground.showRipple();
+                    rippleBackground.showRipple(false);
                 else
-                    rippleBackground.hideRipple();
+                    rippleBackground.hideRipple(false);
                 show = !show;
 
                 /*handler.postDelayed(new Runnable() {

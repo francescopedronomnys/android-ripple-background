@@ -96,6 +96,7 @@ public class RippleBackground extends RelativeLayout implements Animator.Animato
 
         for (int i = 0; i < rippleAmount; i++) {
             RippleView rippleView = new RippleView(getContext());
+            rippleView.setVisibility(GONE);
             addView(rippleView, rippleParams);
             rippleViewList.add(rippleView);
         }
@@ -219,20 +220,29 @@ public class RippleBackground extends RelativeLayout implements Animator.Animato
         }
     }
 
-    public void showRipple() {
+    public void showRipple(boolean animate) {
         if (!isRippleAnimationRunning()) {
-            initAnimation(false);
+            if(animate) {
+                initAnimation(false);
 
-            for (RippleView rippleView : rippleViewList) {
-                rippleView.setVisibility(VISIBLE);
+                for (RippleView rippleView : rippleViewList) {
+                    rippleView.setVisibility(VISIBLE);
+                }
+                animatorSet.start();
+                animationRunning = true;
+            } else {
+                for (RippleView rippleView:rippleViewList) {
+                    rippleView.setVisibility(VISIBLE);
+                    rippleView.setScaleX(rippleScale);
+                    rippleView.setScaleY(rippleScale);
+                }
             }
-            animatorSet.start();
-            animationRunning = true;
         }
     }
 
-    public void hideRipple() {
+    public void hideRipple(boolean animate) {
         if (!isRippleAnimationRunning()) {
+            if(animate) {
             initAnimation(true);
 
             for (RippleView rippleView : rippleViewList) {
@@ -240,6 +250,13 @@ public class RippleBackground extends RelativeLayout implements Animator.Animato
             }
             animatorSet.start();
             animationRunning = true;
+            } else {
+                for (RippleView rippleView:rippleViewList) {
+                    rippleView.setVisibility(GONE);
+                    rippleView.setScaleX(0f);
+                    rippleView.setScaleY(0f);
+                }
+            }
         }
     }
 
