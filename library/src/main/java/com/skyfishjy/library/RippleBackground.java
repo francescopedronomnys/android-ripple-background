@@ -281,8 +281,8 @@ public class RippleBackground extends RelativeLayout implements Animator.Animato
         } else {
             for (RippleView rippleView : rippleViewList) {
                 rippleView.setVisibility(GONE);
-                rippleView.setScaleX(0f);
-                rippleView.setScaleY(0f);
+                rippleView.setScaleX(1f);
+                rippleView.setScaleY(1f);
             }
         }
 
