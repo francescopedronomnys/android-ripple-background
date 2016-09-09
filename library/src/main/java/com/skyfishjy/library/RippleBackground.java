@@ -143,7 +143,7 @@ public class RippleBackground extends RelativeLayout implements Animator.Animato
 
         double max = Math.max(hypotBottomRight, Math.max(hypotBottomLeft, Math.max(hypotUpLeft, hypotUpRight)));
 
-        rippleScale = (float) (max / rippleViewSize) * 2;
+        rippleScale = (float) (max / rippleViewSize) * 4;
     }
 
     private void initAnimation(final boolean reverse) {
